@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AYO NGOPI AJG</title>
+    <style>
+        body {
+            background-color: #3E2723; /* Warna coklat gelap */
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 50px;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        input[type="text"] {
+            padding: 15px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 25px;
+            margin-bottom: 20px;
+            width: 300px;
+            transition: box-shadow 0.3s;
+        }
+        input[type="text"]:focus {
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            outline: none;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 10px;
+            background-color: #6f4c3e; /* Warna coklat kopi */
+            color: white;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        button:hover {
+            background-color: #5b3e30; /* Warna lebih gelap saat hover */
+            transform: scale(1.05);
+        }
+        #nextStep {
+            display: none;
+            margin-top: 20px;
+        }
+        .location-button {
+            display: block;
+            margin: 10px auto;
+            width: 250px;
+            background-color: #8B4513; /* Warna coklat lebih terang */
+        }
+        .location-button:hover {
+            background-color: #7A3B12; /* Warna lebih gelap saat hover */
+        }
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content">
+        <h1>Undangan Ngopi</h1>
+        <input type="text" id="name" placeholder="Masukkan Nama Anda" required>
+        <br>
+        <button onclick="handleResponse('GAS')">GAS</button>
+        <button onclick="handleResponse('NGGAK DULU')">NGGAK DULU</button>
+        <button onclick="window.location.href='https://chat.whatsapp.com/D63u319RoqyIRyYBGyeTDT'">PUNYA USULAN?</button>
+
+        <div id="nextStep">
+            <h2>PILIH LOKASI</h2>
+            <button class="location-button" onclick="redirectToLocation('WARMINDO TN')">WARMINDO TN</button>
+            <button class="location-button" onclick="redirectToLocation('BURJO CAFE BUNGA')">BURJO CAFE BUNGA</button>
+            <button class="location-button" onclick="redirectToLocation('ANGKRINGAN GALIH')">ANGKRINGAN GALIH</button>
+            <button class="location-button" onclick="redirectToLocation('KOPI CARAKITA')">KOPI CARAKITA</button>
+            <button class="location-button" onclick="redirectToLocation('FORE COFFE JAKAL')">FORE COFFE JAKAL</button>
+            <button class="location-button" onclick="redirectToLocation('CIRCLE K BABARSARI')">CIRCLE K BABARSARI</button>
+        </div>
+    </div>
+
+    <script>
+        function handleResponse(option) {
+            const name = document.getElementById('name').value;
+            if (option === 'NGGAK DULU') {
+                alert("AWOKAWOK MAU NGOCOK YAA😹");
+            } else if (option === 'GAS') {
+                document.getElementById('nextStep').style.display = 'block';
+                sendEmail(name);
+            }
+        }
+
+        function redirectToLocation(location) {
+            const currentHour = new Date().getHours();
+            let url;
+
+            switch (location) {
+                case 'WARMINDO TN':
+                    url = 'https://maps.app.goo.gl/BjPsn3Bk6b5NrhFA8?g_st=ac'; // 24 jam
+                    break;
+                case 'BURJO CAFE BUNGA':
+                    url = 'https://maps.app.goo.gl/ZhUomGem9Wa8MKRy6?g_st=ac'; // 24 jam
+                    break;
+                case 'ANGKRINGAN GALIH':
+                    if (currentHour >= 18 || currentHour < 1) { // 18:00 - 01:00
+                        url = 'https://maps.app.goo.gl/sFy3HcY5NRr66XW47?g_st=ac';
+                    } else {
+                        alert("URUNG BUKAK GOK"); // Pesan jika di luar jam akses
+                        return;
+                    }
+                    break;
+                case 'KOPI CARAKITA':
+                case 'FORE COFFE JAKAL':
+                    if (currentHour >= 8 && currentHour < 24) { // 08:00 - 00:00
+                        url = location === 'KOPI CARAKITA' ? 'https://maps.app.goo.gl/chBr2rEYauaZo4JP9?g_st=ac' : 'https://maps.app.goo.gl/SydTRxquxjG59YqZ9?g_st=ac';
+                    } else {
+                        alert("URUNG BUKAK GOK"); // Pesan jika di luar jam akses
+                        return;
+                    }
+                    break;
+                case 'CIRCLE K BABARSARI':
+                    url = 'https://maps.app.goo.gl/wBcSWyeAKp459YNh7?g_st=ac'; // 24 jam
+                    break;
+            }
+
+            window.location.href = url;
+        }
+
+        function sendEmail(name) {
+            // Implementasi pengiriman email menggunakan API atau server-side
+            console.log(`Email dikirim ke lockskiev@gmail.com dengan nama: ${name}`);
+        }
+    </script>
+
+</body>
+</html>
