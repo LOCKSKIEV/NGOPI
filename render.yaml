@@ -1,7 +1,0 @@
-services:
-  - type: web
-    name: php-ngopi
-    env: docker
-    plan: free
-    branch: main
-    dockerfilePath: ./Dockerfile
